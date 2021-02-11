@@ -9,8 +9,6 @@ image = "blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
-
-
 #Data from csv
 data = pandas.read_csv("50_states.csv").to_dict()
 
@@ -25,7 +23,7 @@ while len(guessed_states) < 50:
 
     if answer == "Exit":
         break
-    #print(answer)
+
     for state in data["state"].items():
         if answer==state[1] and answer not in guessed_states:
             correct_guesses+=1
@@ -37,36 +35,8 @@ while len(guessed_states) < 50:
             new_state.name_state(answer)
             new_state.move_state(xcor,ycor)
 
-
-
-
-# def get_mouse_click_coor(x,y):
-#     print(x,y)
-#
-#
-# turtle.onscreenclick(get_mouse_click_coor)
-
-
-
-#print(answer_state)
-
-
-not_guessed_states = []
-for state in data["state"].items():
-    print(state)
-    if state[1] not in guessed_states:
-        not_guessed_states.append(state[1])
-
+not_guessed_states = [state for state in data["state"].items() if state[1] not in guessed_states]
+print(not_guessed_states)
 
 data_output = pandas.DataFrame(not_guessed_states)
 data_output.to_csv("not_guessed_states.csv")
-
-
-
-
-
-#  screen.exitonclick()
-
-
-
-#def get_coordinates(name):
